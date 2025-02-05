@@ -1,0 +1,25 @@
+services:
+  frontend:
+    image: nezbut/portfolio-frontend:latest
+    depends_on:
+      - backend
+
+  backend:
+    image: nezbut/portfolio-backend:latest
+    environment:
+      - GITHUB_USERNAME=nezbut
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - backend
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+
+networks:
+  default:
+    external:
+      name: portfolio-prod

@@ -1,6 +1,6 @@
 async function fetchGithubInfo() {
   try {
-    const response = await fetch("/api/github");
+    const response = await fetch("/api/github/");
     if (!response.ok) {
       throw new Error(`Error: ${response.status}`);
     }

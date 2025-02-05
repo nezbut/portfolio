@@ -1,0 +1,84 @@
+[tool.poetry]
+name = "backend"
+version = "0.1.0"
+description = "Backend for portfolio"
+authors = ["nezbut <anonim@anonim.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.115.8"
+httpx = "^0.28.1"
+
+[tool.poetry.group.test.dependencies]
+mypy = "^1.15.0"
+ruff = "^0.9.4"
+
+[tool.mypy]
+disallow_untyped_defs = true
+disallow_any_unimported = true
+no_implicit_optional = true
+check_untyped_defs = true
+warn_return_any = true
+warn_unused_ignores = true
+show_error_codes = true
+
+[tool.ruff]
+src = ["backend"]
+line-length = 160
+target-version = "py311"
+format.indent-style = "space"
+indent-width = 4
+
+include = ["backend/**.py", "tests/**.py"]
+
+lint.select = [
+    "ALL"
+]
+lint.ignore = [
+    "EXE002",
+    "ARG",
+    "ANN",
+    "D212",
+    "D400",
+    "D401",
+    "D415",
+    "D210",
+    "D104",
+    "D100",
+    "D107",
+    "EM101",
+    "EM102",
+    "PT001",
+    "PT023",
+    "SIM108",
+    "SIM114",
+    "TRY003",
+    "PLW2901",
+    "RET505",
+    "PLR0913",
+    "UP038",
+    "TC001",
+    "RUF001",
+    "RUF002",
+    "RUF003",
+    "G004",
+    "INP001",
+    "UP007",
+    "PYI013",
+    "PIE790",
+    "D211",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["TID252", "PLR2004", "S101", "S106", "S105"]
+
+[tool.ruff.lint.isort]
+no-lines-before = ["local-folder"]
+
+[tool.ruff.lint.flake8-tidy-imports]
+ban-relative-imports = "parents"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

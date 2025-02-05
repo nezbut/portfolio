@@ -11,6 +11,30 @@ backend_image_latest := $(author)/portfolio-backend:latest
 frontend_image_latest := $(author)/portfolio-frontend:latest
 
 # =================================================================================================
+# Dependencies
+# =================================================================================================
+
+.PHONY: install-deps-backend
+install-deps-backend:
+	cd backend && poetry install --with test
+
+.PHONY: install-deps-frontend
+install-deps-frontend:
+	cd frontend && npm install
+
+.PHONY: update-deps-backend
+update-deps-backend:
+	cd backend && poetry update --with test
+
+.PHONY: install-deps-backend-unix
+install-deps-backend-unix:
+	cd backend && poetry install --with test,unix
+
+.PHONY: update-deps-backend-unix
+update-deps-backend-unix:
+	cd backend && poetry update --with test,unix
+
+# =================================================================================================
 # Project Info
 # =================================================================================================
 
@@ -46,7 +70,7 @@ lint-backend:
 .PHONY: build-backend
 build-backend:
 	@echo "Building backend Docker image: $(backend_image)..."
-	cd backend && docker build -t $(backend_image) .
+	docker buildx build -f Dockerfile-backend -t $(backend_image) .
 
 .PHONY: rebuild-backend
 rebuild-backend:
@@ -71,7 +95,7 @@ push-backend:
 .PHONY: build-frontend
 build-frontend:
 	@echo "Building frontend Docker image: $(frontend_image)..."
-	cd frontend && docker build -t $(frontend_image) .
+	docker buildx build -f Dockerfile-frontend -t $(frontend_image) .
 
 .PHONY: rebuild-frontend
 rebuild-frontend:

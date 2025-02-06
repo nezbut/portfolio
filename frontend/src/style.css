@@ -86,3 +86,12 @@ footer .social-links a {
 footer .social-links a:hover {
   color: #e0e0e0;
 }
+
+footer .source-code {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+footer .source-code a {
+  color: #ff9800; /* Например, выделить оранжевым */
+  text-decoration: underline;
+}
